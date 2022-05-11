@@ -2,6 +2,7 @@
 const date = new Date();
 const apiKey = 'd2486f6655ca72c6811146e45c3ac199';
 let counter = 6;
+let key = 0;
 
 // api call
 function citySearch(city) {
@@ -26,6 +27,7 @@ function citySearch(city) {
                 forecast(data);
                 });
         });
+
 };
 
 // current weather display
@@ -75,15 +77,34 @@ function forecast(data) {
     }
 };
 
-// local storage
+// save to local storage
+function saveCity(city) {
+    localStorage.setItem(key, city);
+};
 
+// load local storage
+function loadStorage() {
+    for (let i = 0; i < localStorage.length; i++) {
+        let storedCityEl = document.createElement('button');
+        storedCityEl.classList.add('btn', 'btn-secondary', 'col-12', 'm-1');
+
+        let city = localStorage.getItem(i);
+        storedCityEl.innerHTML = city;
+
+        document.querySelector('#search-container').appendChild(storedCityEl);
+    }
+}
 
 // form submit handler
 function submitHandler (event) {
     event.preventDefault();
     let city = document.querySelector('#search-box').value.trim();
     citySearch(city);
+    saveCity(city);
+    key++;
 }
+
+loadStorage();
 
 // form event listener
 document.querySelector('#search-container')
