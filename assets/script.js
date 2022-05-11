@@ -1,11 +1,9 @@
 // selectors
-const searchBoxEl = document.querySelector('#search-box');
-const searchBtnEl = document.querySelector('#search-btn');
-const searchFormEl = document.querySelector('#search-container');
 
 // api key
 const apiKey = 'd2486f6655ca72c6811146e45c3ac199';
 
+// api call
 function citySearch(city) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey)
         .then(function (response) {
@@ -28,12 +26,22 @@ function citySearch(city) {
         });
 };
 
+// current weather display
+
+
+// 5 day forecast display
+
+
+// local storage
+
+
+// form submit handler
 function submitHandler (event) {
     event.preventDefault();
-    console.log('search submitted.');
-    console.log(searchBoxEl.value);
-    let city = searchBoxEl.value.trim();
+    let city = document.querySelector('#search-box').value.trim();
     citySearch(city);
 }
 
-searchFormEl.addEventListener('submit', submitHandler);
+// form event listener
+document.querySelector('#search-container')
+    .addEventListener('submit', submitHandler);
